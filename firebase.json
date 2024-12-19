@@ -1,0 +1,119 @@
+{
+  "hosting": {
+    "public": "dist",
+    "headers": [
+      {
+        "source": "/service-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css|jpg|jpeg|gif|png|webp|webp2|mp4|html5|webm)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+          }
+        ]
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20",
+    "region": "europe-west3",
+    "runtime_options": {
+      "timeoutSeconds": 300,
+      "memory": "512MB",
+      "maxInstances": 5
+    },
+    "httpsTrigger": {
+      "enforceAppCheck": true,
+      "rateLimits": {
+        "maxConcurrentRequests": 5,
+        "maxRequestsPerSecond": 1
+      }
+    }
+  },
+  "firestore": {
+    "indexes": {
+      "bookings": [
+        {
+          "collectionGroup": "bookings",
+          "queryScope": "COLLECTION",
+          "fields": [
+            {
+              "fieldPath": "checkoutSessionId",
+              "order": "ASCENDING"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "emulators": {
+    "functions": {
+      "port": 3001
+    },
+    "hosting": {
+      "port": 3000
+    },
+    "ui": {
+      "enabled": true,
+      "port": 3002
+    }
+  },
+  "lifecycle": {
+    "rule": [
+      {
+        "action": {
+          "type": "Delete"
+        },
+        "condition": {
+          "age": 14,
+          "isLive": true
+        }
+      }
+    ]
+  }
+}

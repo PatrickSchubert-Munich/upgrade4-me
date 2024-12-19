@@ -1,0 +1,26 @@
+# Settings for Backend (on Cloud Run).
+# See https://firebase.google.com/docs/app-hosting/configure#cloud-run
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 50
+  # cpu: 2
+  memoryMiB: 512
+
+# Environment variables and secrets.
+env:
+  # Configure environment variables.
+  # See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
+  # - variable: MESSAGE
+  #   value: Hello world!
+  #   availability:
+  #     - BUILD
+  #     - RUNTIME
+
+  # Grant access to secrets in Cloud Secret Manager.
+  # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
+  - variable: STRIPE_SECRET_KEY
+    secret: sk_test_51QGjxPB2jk01p60wRl0GUFWW64HOftyL3GhU5S5SYyyToa4L5gL9NZIbgHSxgxad0x2vaTFle8Chp74GdoGGPoxT00jmuKoCQy
+
+  - variable: SSTRIPE_WEBHOOK_SECRET
+    secret: whsec_k2IWxIFYSNocAjaulaCnJlXCu2f9oWcW

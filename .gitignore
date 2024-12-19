@@ -1,0 +1,46 @@
+# VS Code specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/           # Local VS Code history
+*.vsix             # VS Code extensions
+
+# Dependencies and package managers
+node_modules/      # NPM packages
+*.local            # Local development files
+.sass-cache/      # Sass compiler cache
+*.css.map         # Source map files for CSS
+
+# Environment and security
+.env              # Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+serviceAccountKey.json     # Firebase service account keys
+*serviceAccountKey*.json   # Any variation of service account keys
+
+# Firebase specific
+.firebase/        # Firebase cache and local files
+firebase-debug.log
+firestore-debug.log
+functions/.runtimeconfig.json
+
+# SSL Certificates and keys
+/https
+*.crt
+*.key
+*.pem
+
+# Build and temporary files
+dist/             # Webpack output directory
+*.log            # Log files
+./stripe.exe     # Stripe CLI executable
+
+# Temporary excluded directories
+styles_scss/     # SCSS source files
+src/assets/video/ffmpeg.txt
+src/assets/source_videos
